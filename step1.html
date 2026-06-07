@@ -146,6 +146,10 @@
       cursor: not-allowed;
     }
 
+    .hidden {
+      display: none;
+    }
+
     @media (max-width: 800px) {
       .options {
         grid-template-columns: 1fr;
@@ -178,13 +182,22 @@
       <h1>Pick Your Dinner Option</h1>
       <p class="subheadline">Only one option can be chosen.</p>
 
-      <form action="final.html" method="get" id="stepForm">
+      <form
+        name="dinner-selection"
+        method="POST"
+        action="/final.html"
+        data-netlify="true"
+        id="stepForm"
+      >
+        <input type="hidden" name="form-name" value="dinner-selection" />
+        <input type="hidden" name="selection_time_et" id="selectionTimeET" value="" />
+
         <div class="options">
           <div class="option-card">
             <label>
               <div class="food-image" aria-hidden="true">🍕</div>
               <div class="food-name">Pizza</div>
-              <input class="selector" type="radio" name="dinner" value="pizza" />
+              <input class="selector" type="radio" name="dinner" value="Pizza" />
             </label>
           </div>
 
@@ -192,7 +205,7 @@
             <label>
               <div class="food-image" aria-hidden="true">🍝</div>
               <div class="food-name">Pasta</div>
-              <input class="selector" type="radio" name="dinner" value="pasta" />
+              <input class="selector" type="radio" name="dinner" value="Pasta" />
             </label>
           </div>
 
@@ -200,7 +213,7 @@
             <label>
               <div class="food-image" aria-hidden="true">🍣</div>
               <div class="food-name">Sushi Roll</div>
-              <input class="selector" type="radio" name="dinner" value="sushi-roll" />
+              <input class="selector" type="radio" name="dinner" value="Sushi Roll" />
             </label>
           </div>
         </div>
@@ -215,6 +228,21 @@
     const radios = form.querySelectorAll('input[type="radio"]');
     const nextButton = document.getElementById('nextStep');
     const cards = form.querySelectorAll('.option-card');
+    const timeField = document.getElementById('selectionTimeET');
+
+    function getEasternTimeString() {
+      return new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/New_York',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+        timeZoneName: 'short'
+      }).format(new Date());
+    }
 
     function updateSelectionState() {
       let hasSelection = false;
@@ -226,10 +254,17 @@
       });
 
       nextButton.disabled = !hasSelection;
+      if (hasSelection) {
+        timeField.value = getEasternTimeString();
+      }
     }
 
     radios.forEach((radio) => {
       radio.addEventListener('change', updateSelectionState);
+    });
+
+    form.addEventListener('submit', () => {
+      timeField.value = getEasternTimeString();
     });
 
     updateSelectionState();
