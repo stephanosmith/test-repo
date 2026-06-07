@@ -14,9 +14,7 @@
       --card-bg: #0d0d0d;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
       margin: 0;
@@ -84,24 +82,11 @@
     }
 
     .message-title {
-      margin: 0 0 8px;
+      margin: 0;
       font-size: 1rem;
       font-weight: 600;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-    }
-
-    .message-text {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .details {
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.7;
     }
 
     @media (max-width: 800px) {
@@ -130,43 +115,9 @@
 
       <div class="message-card">
         <div class="icon-box" aria-hidden="true">✉️</div>
-        <p class="message-title">You selection has been sent.</p>
-        <p class="message-text" id="selectionText">Preparing your confirmation...</p>
+        <p class="message-title">Your selection has been sent.</p>
       </div>
-
-      <div class="details" id="details"></div>
     </section>
   </main>
-
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const selected = params.get('dinner') || 'unknown selection';
-
-    const selectionMap = {
-      'pizza': 'Pizza',
-      'pasta': 'Pasta',
-      'sushi-roll': 'Sushi Roll'
-    };
-
-    const readableSelection = selectionMap[selected] || selected;
-
-    const easternTime = new Intl.DateTimeFormat('en-US', {
-      timeZone: 'America/New_York',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true
-    }).format(new Date());
-
-    document.getElementById('selectionText').textContent =
-      'Selected option: ' + readableSelection;
-
-    document.getElementById('details').innerHTML =
-      'Selection recorded: ' + readableSelection + '<br>' +
-      'Time recorded (Eastern Time): ' + easternTime;
-  </script>
 </body>
 </html>

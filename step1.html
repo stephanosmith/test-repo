@@ -17,9 +17,7 @@
       --card-bg: #0d0d0d;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html, body {
       margin: 0;
@@ -146,10 +144,6 @@
       cursor: not-allowed;
     }
 
-    .hidden {
-      display: none;
-    }
-
     @media (max-width: 800px) {
       .options {
         grid-template-columns: 1fr;
@@ -182,14 +176,7 @@
       <h1>Pick Your Dinner Option</h1>
       <p class="subheadline">Only one option can be chosen.</p>
 
-      <form
-        name="dinner-selection"
-        method="POST"
-        action="/final.html"
-        data-netlify="true"
-        id="stepForm"
-      >
-        <input type="hidden" name="form-name" value="dinner-selection" />
+      <form action="/.netlify/functions/send-selection" method="POST" id="stepForm">
         <input type="hidden" name="selection_time_et" id="selectionTimeET" value="" />
 
         <div class="options">
@@ -254,6 +241,7 @@
       });
 
       nextButton.disabled = !hasSelection;
+
       if (hasSelection) {
         timeField.value = getEasternTimeString();
       }
