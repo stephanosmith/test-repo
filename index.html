@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Page</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #ffffff;
+      --border: rgba(255, 255, 255, 0.85);
+      --muted: rgba(255, 255, 255, 0.72);
+      --button: #b33434;
+      --button-hover: #962828;
+      --max-width: 920px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--max-width);
+      border: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+
+    .inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .subheadline {
+      margin: 0 0 32px;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .video-shell {
+      width: 100%;
+      margin: 0 auto 28px;
+      border: 1px solid var(--border);
+      padding: 14px;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #111111;
+      overflow: hidden;
+    }
+
+    .video-frame iframe,
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--button);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: background 0.2s ease;
+    }
+
+    .cta:hover {
+      background: var(--button-hover);
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 28px 18px;
+      }
+
+      .subheadline {
+        margin-bottom: 24px;
+      }
+
+      .video-shell {
+        padding: 10px;
+      }
+
+      .cta {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="inner">
+      <h1>My Very First Website Flow</h1>
+      <p class="subheadline">Practice site using my new stack. Featuring Github & Netlify.</p>
+
+      <div class="video-shell">
+        <div class="video-frame">
+          <!-- Replace the placeholder below with your Vimeo embed code -->
+          <iframe title="vimeo-player" src="https://player.vimeo.com/video/1075228971?h=a7da8aab74" width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"   allowfullscreen></iframe>
+
+          <!-- Example Vimeo embed:
+          <iframe
+            src="https://player.vimeo.com/video/VIDEO_ID"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+            title="Vimeo video">
+          </iframe>
+          -->
+        </div>
+      </div>
+
+      <a class="cta" href="step1.html">Next Step</a>
+    </section>
+  </main>
+</body>
+</html>

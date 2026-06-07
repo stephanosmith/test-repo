@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Final</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #ffffff;
+      --border: rgba(255, 255, 255, 0.85);
+      --muted: rgba(255, 255, 255, 0.72);
+      --max-width: 920px;
+      --card-bg: #0d0d0d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--max-width);
+      border: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+
+    .inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .subheadline {
+      margin: 0 0 32px;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .message-card {
+      max-width: 260px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      padding: 18px 14px 20px;
+    }
+
+    .icon-box {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: #111111;
+      font-size: 4rem;
+      line-height: 1;
+    }
+
+    .message-title {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .message-text {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .details {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 800px) {
+      .icon-box {
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 28px 18px;
+      }
+
+      .subheadline {
+        margin-bottom: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="inner">
+      <h1>Your Selection Has Been Received</h1>
+      <p class="subheadline">Thank you for your selection.</p>
+
+      <div class="message-card">
+        <div class="icon-box" aria-hidden="true">✉️</div>
+        <p class="message-title">You selection has been sent.</p>
+        <p class="message-text" id="selectionText">Preparing your confirmation...</p>
+      </div>
+
+      <div class="details" id="details"></div>
+    </section>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const selected = params.get('dinner') || 'unknown selection';
+
+    const selectionMap = {
+      'pizza': 'Pizza',
+      'pasta': 'Pasta',
+      'sushi-roll': 'Sushi Roll'
+    };
+
+    const readableSelection = selectionMap[selected] || selected;
+
+    const easternTime = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    }).format(new Date());
+
+    document.getElementById('selectionText').textContent =
+      'Selected option: ' + readableSelection;
+
+    document.getElementById('details').innerHTML =
+      'Selection recorded: ' + readableSelection + '<br>' +
+      'Time recorded (Eastern Time): ' + easternTime;
+  </script>
+</body>
+</html>
