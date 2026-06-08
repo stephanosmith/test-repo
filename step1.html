@@ -15,6 +15,7 @@
       --button-disabled: #4f2323;
       --max-width: 920px;
       --card-bg: #0d0d0d;
+      --input-bg: #111111;
     }
 
     * {
@@ -56,6 +57,7 @@
       line-height: 1.1;
       font-weight: 600;
       letter-spacing: -0.02em;
+      text-wrap: balance;
     }
 
     .subheadline {
@@ -65,75 +67,70 @@
       color: var(--muted);
     }
 
-    .options {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 0 0 28px;
-    }
-
-    .option-card {
+    .form-shell {
       border: 1px solid var(--border);
       background: var(--card-bg);
-      padding: 18px 14px 20px;
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      padding: 24px 20px;
+      text-align: left;
     }
 
-    .option-card:hover {
-      transform: translateY(-2px);
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
     }
 
-    .option-card.selected {
-      border-color: #ffffff;
-      background: #141414;
-    }
-
-    .option-card label {
-      display: block;
-      cursor: pointer;
-    }
-
-    .food-image {
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 16px;
+    .field {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      background: #111111;
-      font-size: 4rem;
-      line-height: 1;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    .food-name {
-      margin: 0 0 14px;
-      font-size: 1rem;
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.9rem;
+      color: var(--text);
       font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
     }
 
-    .selector {
-      width: 20px;
-      height: 20px;
-      accent-color: #b33434;
-      cursor: pointer;
+    input {
+      width: 100%;
+      padding: 14px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: var(--input-bg);
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.42);
+    }
+
+    input:focus {
+      border-color: rgba(255, 255, 255, 0.85);
     }
 
     .cta {
       display: inline-block;
-      padding: 14px 28px;
+      width: 100%;
+      padding: 16px 28px;
       background: var(--button);
       color: #ffffff;
       text-decoration: none;
       font-size: 0.95rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       border: none;
       transition: background 0.2s ease, opacity 0.2s ease;
       cursor: pointer;
+      margin-top: 8px;
     }
 
     .cta:hover:not(:disabled) {
@@ -146,23 +143,16 @@
       cursor: not-allowed;
     }
 
-    .hidden-field {
-      display: none;
+    .disclaimer {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--muted);
+      text-align: center;
     }
 
-    @media (max-width: 800px) {
-      .options {
-        grid-template-columns: 1fr;
-      }
-
-      .food-image {
-        width: 120px;
-        height: 120px;
-      }
-
-      .cta {
-        width: 100%;
-      }
+    .hidden-field {
+      display: none;
     }
 
     @media (max-width: 640px) {
@@ -173,108 +163,121 @@
       .subheadline {
         margin-bottom: 24px;
       }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
     <section class="inner">
-      <h1>Pick Your Dinner Option</h1>
-      <p class="subheadline">Only one option can be chosen.</p>
+      <h1>Get Instant Access to The Futures Trading Video Series 100% FREE</h1>
+      <p class="subheadline">Fill out the form below while you can.</p>
 
-      <form
-        name="dinner-selection"
-        method="POST"
-        action="final.html"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        id="stepForm"
-      >
-        <input type="hidden" name="form-name" value="dinner-selection" />
+    <form method="POST" action="/.netlify/functions/send-lead" id="accessForm" class="form-shell">
+        <input type="hidden" name="form-name" value="futures-video-access" />
 
         <p class="hidden-field">
           <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
         </p>
 
-        <input type="hidden" name="selection_time_et" id="selectionTimeET" value="" />
-
-        <div class="options">
-          <div class="option-card">
-            <label>
-              <div class="food-image" aria-hidden="true">🍕</div>
-              <div class="food-name">Pizza</div>
-              <input class="selector" type="radio" name="dinner" value="Pizza" />
-            </label>
+        <div class="form-grid">
+          <div class="field">
+            <label for="firstName">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              name="first_name"
+              placeholder="Enter your first name"
+              autocomplete="given-name"
+              required
+            />
           </div>
 
-          <div class="option-card">
-            <label>
-              <div class="food-image" aria-hidden="true">🍝</div>
-              <div class="food-name">Pasta</div>
-              <input class="selector" type="radio" name="dinner" value="Pasta" />
-            </label>
+          <div class="field">
+            <label for="lastName">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              name="last_name"
+              placeholder="Enter your last name"
+              autocomplete="family-name"
+              required
+            />
           </div>
 
-          <div class="option-card">
-            <label>
-              <div class="food-image" aria-hidden="true">🍣</div>
-              <div class="food-name">Sushi Roll</div>
-              <input class="selector" type="radio" name="dinner" value="Sushi Roll" />
-            </label>
+          <div class="field full">
+            <label for="emailAddress">Primary Email Address</label>
+            <input
+              type="email"
+              id="emailAddress"
+              name="email"
+              placeholder="Enter your primary email address"
+              autocomplete="email"
+              required
+            />
+          </div>
+
+          <div class="field full">
+            <label for="cellPhone">Cell Phone Number</label>
+          <input type="tel" id="cellPhone" name="cell_phone" placeholder="Enter your cell phone number" inputmode="numeric"
+            pattern="[0-9]{10,12}" minlength="10" maxlength="12" autocomplete="tel" required />
           </div>
         </div>
 
-        <button class="cta" type="submit" id="nextStep" disabled>Next Step</button>
+        <button class="cta" type="submit" id="submitButton" disabled>
+          YES! I Want Instant Access
+        </button>
+
+        <p class="disclaimer">
+          We respect your privacy and will never share, rent, or sell your information.
+          By submitting this form, you agree to receive communications related to this offer.
+          No spam. Ever.
+        </p>
       </form>
     </section>
   </main>
 
-  <script>
-    const form = document.getElementById('stepForm');
-    const radios = form.querySelectorAll('input[type="radio"]');
-    const nextButton = document.getElementById('nextStep');
-    const cards = form.querySelectorAll('.option-card');
-    const timeField = document.getElementById('selectionTimeET');
+ <script>
+  const form = document.getElementById('accessForm');
+  const submitButton = document.getElementById('submitButton');
+  const firstName = document.getElementById('firstName');
+  const lastName = document.getElementById('lastName');
+  const emailAddress = document.getElementById('emailAddress');
+  const cellPhone = document.getElementById('cellPhone');
 
-    function getEasternTimeString() {
-      return new Intl.DateTimeFormat('en-US', {
-        timeZone: 'America/New_York',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true,
-        timeZoneName: 'short'
-      }).format(new Date());
+  function validateForm() {
+    const firstNameValid = firstName.value.trim() !== '';
+    const lastNameValid = lastName.value.trim() !== '';
+    const emailValid = emailAddress.value.trim() !== '';
+    const phoneDigits = cellPhone.value.replace(/\D/g, '');
+    const phoneValid = phoneDigits.length >= 10 && phoneDigits.length <= 12;
+
+    submitButton.disabled = !(firstNameValid && lastNameValid && emailValid && phoneValid);
+  }
+
+  cellPhone.addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, 12);
+    validateForm();
+  });
+
+  [firstName, lastName, emailAddress, cellPhone].forEach(field => {
+    field.addEventListener('input', validateForm);
+    field.addEventListener('blur', validateForm);
+  });
+
+  form.addEventListener('submit', function (e) {
+    const phoneDigits = cellPhone.value.replace(/\D/g, '');
+    if (phoneDigits.length < 10 || phoneDigits.length > 12) {
+      e.preventDefault();
+      alert('Please enter a valid cell phone number with 10 to 12 digits.');
+      cellPhone.focus();
     }
+  });
 
-    function updateSelectionState() {
-      let hasSelection = false;
-
-      radios.forEach((radio, index) => {
-        const selected = radio.checked;
-        cards[index].classList.toggle('selected', selected);
-        if (selected) hasSelection = true;
-      });
-
-      nextButton.disabled = !hasSelection;
-
-      if (hasSelection) {
-        timeField.value = getEasternTimeString();
-      }
-    }
-
-    radios.forEach((radio) => {
-      radio.addEventListener('change', updateSelectionState);
-    });
-
-    form.addEventListener('submit', () => {
-      timeField.value = getEasternTimeString();
-    });
-
-    updateSelectionState();
-  </script>
+  validateForm();
+</script>
 </body>
 </html>

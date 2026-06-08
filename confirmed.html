@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email Confirmed</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.72);
+      --border: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(255, 255, 255, 0.16);
+      --card-bg: #0d0d0d;
+      --hover-bg: #151515;
+      --accent: #b33434;
+      --accent-hover: #962828;
+      --max-width: 920px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: var(--max-width);
+      border: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+
+    .inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 4.6vw, 3.5rem);
+      line-height: 1.12;
+      font-weight: 600;
+      text-wrap: balance;
+    }
+
+    .subcopy {
+      margin: 0 auto 18px;
+      max-width: 640px;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .confirmation-card {
+      margin-top: 28px;
+      padding: 28px 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+    }
+
+    .status-badge {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .confirmation-title {
+      margin: 0 0 14px;
+      font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    .confirmation-text {
+      margin: 0 auto;
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      min-width: 240px;
+      padding: 16px 24px;
+      border: 1px solid transparent;
+      background: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .cta-button:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .secondary-button {
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.28);
+      color: var(--text);
+    }
+
+    .secondary-button:hover {
+      background: var(--hover-bg);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    .helper {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 560px) {
+      .wrap {
+        padding: 28px 18px;
+      }
+
+      .confirmation-card {
+        padding: 24px 16px;
+      }
+
+      .cta-button {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="inner">
+      <h1>Your Email Has Been Confirmed</h1>
+      <p class="subcopy">
+        You have successfully confirmed your email address and unlocked access to the 100% FREE Futures Trading Video Series.
+      </p>
+      <p class="subcopy">
+        Click the button below to continue to your next step.
+      </p>
+
+      <div class="confirmation-card">
+        <div class="status-badge">Confirmed</div>
+        <h2 class="confirmation-title">You’re Officially In</h2>
+        <p class="confirmation-text">
+          Your confirmation is complete. You can now proceed to access the video series and continue through the experience.
+        </p>
+
+        <div class="cta-group">
+          <a href="index.html" class="cta-button">Access The Video Series</a>
+          <a href="step1.html" class="cta-button secondary-button">Go Back</a>
+        </div>
+      </div>
+
+      <p class="helper">
+        If you reached this page by mistake or need help accessing your content, return to the previous step and submit your information again.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

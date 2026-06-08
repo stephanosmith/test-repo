@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Final</title>
+  <title>Check Your Inbox</title>
   <style>
     :root {
       --bg: #000000;
       --text: #ffffff;
-      --border: rgba(255, 255, 255, 0.85);
       --muted: rgba(255, 255, 255, 0.72);
-      --max-width: 920px;
+      --border: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(255, 255, 255, 0.16);
       --card-bg: #0d0d0d;
+      --hover-bg: #151515;
+      --max-width: 920px;
+      --icon-size: 72px;
     }
 
     * {
@@ -48,63 +51,94 @@
     }
 
     h1 {
-      margin: 0 0 16px;
-      font-size: clamp(2rem, 5vw, 3.75rem);
-      line-height: 1.1;
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 4.6vw, 3.5rem);
+      line-height: 1.12;
       font-weight: 600;
-      letter-spacing: -0.02em;
+      text-wrap: balance;
     }
 
-    .subheadline {
-      margin: 0 0 32px;
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      line-height: 1.6;
+    .subcopy {
+      margin: 0 auto 32px;
+      max-width: 640px;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      line-height: 1.7;
       color: var(--muted);
     }
 
-    .message-card {
-      max-width: 260px;
-      margin: 0 auto;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      padding: 18px 14px 20px;
+    .provider-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 20px;
     }
 
-    .icon-box {
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 16px;
+    .provider-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 170px;
+      padding: 18px 12px;
+      text-decoration: none;
+      color: var(--text);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .provider-card:hover {
+      background: var(--hover-bg);
+      border-color: rgba(255, 255, 255, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .provider-icon-wrap {
+      width: var(--icon-size);
+      height: var(--icon-size);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      background: #111111;
-      font-size: 4rem;
-      line-height: 1;
+      margin-bottom: 12px;
+      background: #ffffff;
+      border-radius: 14px;
+      overflow: hidden;
     }
 
-    .message-title {
-      margin: 0;
-      font-size: 1rem;
+    .provider-icon {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .provider-name {
+      font-size: 0.95rem;
+      line-height: 1.4;
       font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      text-align: center;
     }
 
-    @media (max-width: 800px) {
-      .icon-box {
-        width: 120px;
-        height: 120px;
+    .helper {
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 860px) {
+      .provider-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 560px) {
       .wrap {
         padding: 28px 18px;
       }
 
-      .subheadline {
-        margin-bottom: 24px;
+      .provider-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
   </style>
@@ -112,13 +146,77 @@
 <body>
   <main class="wrap">
     <section class="inner">
-      <h1>Your Selection Has Been Received</h1>
-      <p class="subheadline">Thank you for your selection.</p>
+      <h1>Check Your Inbox For Our Email</h1>
+      <p class="subcopy">Please login to your email account & look for an&nbsp;email&nbsp;from&nbsp;us.<br>Below are some of the most popular email&nbsp;service&nbsp;providers.</p>
 
-      <div class="message-card">
-        <div class="icon-box" aria-hidden="true">✉️</div>
-        <p class="message-title">Your selection has been sent.</p>
+      <div class="provider-grid">
+        <a class="provider-card" href="https://mail.google.com" target="_blank" rel="noopener noreferrer">
+          <div class="provider-icon-wrap">
+            <img
+              class="provider-icon"
+              src="https://images.icon-icons.com/2642/PNG/512/google_mail_gmail_logo_icon_159346.png"
+              alt="Gmail logo"
+              width="44"
+              height="44"
+            />
+          </div>
+          <div class="provider-name">Gmail</div>
+        </a>
+
+        <a class="provider-card" href="https://outlook.live.com/mail/" target="_blank" rel="noopener noreferrer">
+          <div class="provider-icon-wrap">
+            <img
+              class="provider-icon"
+              src="https://img.icons8.com/color/1200/microsoft-outlook-2025.jpg"
+              alt="Outlook logo"
+              width="44"
+              height="44"
+            />
+          </div>
+          <div class="provider-name">Outlook</div>
+        </a>
+
+        <a class="provider-card" href="https://login.yahoo.com" target="_blank" rel="noopener noreferrer">
+          <div class="provider-icon-wrap">
+            <img
+              class="provider-icon"
+              src="https://play-lh.googleusercontent.com/YtGn2T9ADy5Hs4cKVoDgGb7fPuMkdXVcszVE1oiozfE4AxhDNq0RkwajYs1FxcrMDpw"
+              alt="Yahoo Mail logo"
+              width="44"
+              height="44"
+            />
+          </div>
+          <div class="provider-name">Yahoo! Mail</div>
+        </a>
+
+        <a class="provider-card" href="https://login.aol.com" target="_blank" rel="noopener noreferrer">
+          <div class="provider-icon-wrap">
+            <img
+              class="provider-icon"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVt-O8uMellpIlbOe0D5rRU26WtU4YBAS8XA&s"
+              alt="AOL Mail logo"
+              width="44"
+              height="44"
+            />
+          </div>
+          <div class="provider-name">AOL Mail</div>
+        </a>
+
+        <a class="provider-card" href="https://www.icloud.com/mail" target="_blank" rel="noopener noreferrer">
+          <div class="provider-icon-wrap">
+            <img
+              class="provider-icon"
+              src="https://cdn.simpleicons.org/icloud"
+              alt="iCloud Mail logo"
+              width="44"
+              height="44"
+            />
+          </div>
+          <div class="provider-name">iCloud Mail</div>
+        </a>
       </div>
+
+      <p class="helper">Tip: if you do not see the email right away, check your promotions, updates, spam, or junk folder.</p>
     </section>
   </main>
 </body>

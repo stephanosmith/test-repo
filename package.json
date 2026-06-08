@@ -1,0 +1,7 @@
+{
+  "name": "futures-video-poc",
+  "version": "1.0.0",
+  "dependencies": {
+    "resend": "^4.8.0"
+  }
+}
