@@ -15,10 +15,18 @@ exports.handler = async (event) => {
 
     const resend = new Resend(process.env.RESEND_API_KEY123);
 
-    await resend.contacts.update({
-      email: email,
+    const { data, error } = await resend.contacts.update({
+      email,
       unsubscribed: false
     });
+
+    if (error) {
+      console.error("Resend update error:", error);
+      return {
+        statusCode: 500,
+        body: JSON.stringify(error)
+      };
+    }
 
     return {
       statusCode: 302,
@@ -27,8 +35,7 @@ exports.handler = async (event) => {
       }
     };
   } catch (error) {
-    console.error("Confirm email error:", error);
-
+    console.error("Confirm email crash:", error);
     return {
       statusCode: 500,
       body: "There was an error confirming the email."
